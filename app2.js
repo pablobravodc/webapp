@@ -1,22 +1,22 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
-require('dotenv').config();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const path = require('path');
 
 const app = express();
+const PORT = 3000;
 
-// Configurar middleware
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configurar la conexión a la base de datos MySQL
+// Configuración de la conexión a la base de datos
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    host: 'localhost',
+    user: 'root',
+    password: '1992',
+    database: 'webapp'
 });
 
 db.connect((err) => {
@@ -24,25 +24,15 @@ db.connect((err) => {
     console.log('Conectado a la base de datos MySQL');
 });
 
-// Rutas
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'views', 'register.html'));
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'views', 'login.html'));
-});
-
+// Ruta de registro de usuarios
 app.post('/register', (req, res) => {
     const { nombre, cedula, correo, telefono, usuario, clave } = req.body;
+    const hashedPassword = bcrypt.hashSync(clave, 8);
+
     const query = 'INSERT INTO users (nombre, cedula, correo, telefono, usuario, clave) VALUES (?, ?, ?, ?, ?, ?)';
-    db.query(query, [nombre, cedula, correo, telefono, usuario, clave], (err, result) => {
-        if (err) throw err;
-        res.redirect('/login');
+    db.query(query, [nombre, cedula, correo, telefono, usuario, hashedPassword], (err, result) => {
+        if (err) return res.status(500).send('Error en el servidor');
+        res.status(200).send('Usuario registrado con éxito');
     });
 });
 
@@ -67,7 +57,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+// Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
