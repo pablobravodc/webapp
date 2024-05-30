@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.querySelector('form[action="/register"]');
     if (registerForm) {
         registerForm.addEventListener('submit', function(event) {
-            const password = registerForm.querySelector('input[name="password"]').value;
-            const confirmPassword = registerForm.querySelector('input[name="confirm_password"]').value;
+            const password = registerForm.querySelector('input[name="clave"]').value;
+            const confirmPassword = registerForm.querySelector('input[name="confirm_clave"]').value;
             
             if (password !== confirmPassword) {
                 event.preventDefault();
