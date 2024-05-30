@@ -92,8 +92,9 @@ app.post('/login', (req, res) => {
         const token = jwt.sign({ id: user.id }, 'supersecreto', {
             expiresIn: 86400 // 24 horas
         });
+        console.log('Bienvenido ', user.nombre);
 
-        res.status(200).send({ auth: true, token });
+        res.status(200).send({ auth: true, token});
     });
 });
 
