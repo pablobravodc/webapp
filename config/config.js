@@ -2,20 +2,6 @@ require('dotenv').config(); // Asegúrate de tener dotenv configurado
 const { Sequelize } = require('sequelize');
 
 
-module.exports = {
-  development: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'mysql'
-  },
-// Exportar la instancia de Sequelize y la función de autenticación
-
-  sequelize,
-  authenticate
-};
 
 // Configuración de la conexión a la base de datos
 const sequelize = new Sequelize('nombre_basedatos', 'usuario', 'contraseña', {
@@ -32,3 +18,20 @@ async function authenticate() {
     console.error('Error al conectar a la base de datos:', error);
   }
 }
+
+
+
+module.exports = {
+    development: {
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      dialect: 'mysql'
+    },
+  // Exportar la instancia de Sequelize y la función de autenticación
+  
+    sequelize,
+    authenticate
+  };
