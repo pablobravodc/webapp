@@ -7,10 +7,10 @@ const mysql = require('mysql2');
 require('dotenv').config();
 const app = express();
 
-const db = require('./models'); // Asegúrate de que la ruta sea correcta
+const dbs = require('./models'); // Asegúrate de que la ruta sea correcta
 
 // Sincronizar modelos y base de datos
-db.sequelize.sync()
+dbs.sequelize.sync()
   .then(() => {
     console.log('Database connected');
   })
@@ -18,7 +18,7 @@ db.sequelize.sync()
     console.error('Error connecting to the database: ', err);
   });
 
-  
+
 
 
 
