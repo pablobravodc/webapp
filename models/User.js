@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-
-const sequelize = require('../config/config.js'); // Importa la instancia de Sequelize
+const sequelize = require('../config/config.js'); // Ajusta la ruta según sea necesario
 
 const User = sequelize.define('User', {
   // Definir los campos del modelo
@@ -15,7 +14,7 @@ const User = sequelize.define('User', {
   correo: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true // El correo debe ser único
+    unique: true
   },
   telefono: {
     type: DataTypes.STRING,
@@ -24,7 +23,7 @@ const User = sequelize.define('User', {
   usuario: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true // El nombre de usuario debe ser único
+    unique: true
   },
   clave: {
     type: DataTypes.STRING,
