@@ -9,6 +9,9 @@ const sequelize = new Sequelize(
     host: config.development.host,
     port: config.development.port,
     dialect: 'mysql',
+    dialectOptions: {
+      connectTimeout: 60000 // Aumentar el tiempo de espera a 60 segundos (valor en milisegundos)
+    }
   }
 );
 
