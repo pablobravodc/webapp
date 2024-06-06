@@ -11,6 +11,7 @@ const app = express();
 const db = require('./models'); // Asegúrate de que la ruta sea correcta
 
 const User = require('./models/User');
+const sequelize = require('./config/config');
 
 // Sincronizar modelos y base de datos
 db.sequelize.sync()
