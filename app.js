@@ -7,7 +7,10 @@ const mysql = require('mysql2');
 require('dotenv').config();
 const app = express();
 
+
 const db = require('./models'); // Asegúrate de que la ruta sea correcta
+
+const User = require('./models/User');
 
 // Sincronizar modelos y base de datos
 db.sequelize.sync()
