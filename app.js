@@ -5,9 +5,22 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2');
 require('dotenv').config();
-
-
 const app = express();
+
+const db = require('./models'); // Asegúrate de que la ruta sea correcta
+
+// Sincronizar modelos y base de datos
+db.sequelize.sync()
+  .then(() => {
+    console.log('Database connected');
+  })
+  .catch(err => {
+    console.error('Error connecting to the database: ', err);
+  });
+
+  
+
+
 
 // Configurar middleware
 app.use(bodyParser.urlencoded({ extended: true }));
