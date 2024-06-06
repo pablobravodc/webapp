@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/config'); // Ajusta la ruta según sea necesario
+const sequelize = require('../models/index'); // Ajusta la ruta según sea necesario
 
-const User = Sequelize.define('User', {
+const User = sequelize.define('User', {
   // Definir los campos del modelo
   nombre: {
     type: DataTypes.STRING,
