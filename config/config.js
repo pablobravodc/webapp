@@ -3,22 +3,24 @@ const { Sequelize } = require('sequelize');
 
 
 
-// Configuración de la conexión a la base de datos
-const sequelize = new Sequelize('nombre_basedatos', 'usuario', 'contraseña', {
-  host: 'localhost',
-  dialect: 'mysql', // El dialecto puede variar según el tipo de base de datos que estés utilizando (mysql, postgres, sqlite, etc.)
-});
 
-// Verificar la conexión a la base de datos
-async function authenticate() {
-  try {
-    await sequelize.authenticate();
-    console.log('Conexión a la base de datos establecida correctamente.');
-  } catch (error) {
-    console.error('Error al conectar a la base de datos:', error);
+// Crear una nueva instancia de Sequelize con los detalles de la conexión a la base de datos
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql', // Cambiar según el tipo de base de datos que estés utilizando (mysql, postgres, sqlite, etc.)
+    port: process.env.DB_PORT, // Asegúrate de que el puerto esté configurado correctamente en tu archivo .env
+    logging: false, // Desactivar el registro de consultas SQL, opcional
+  });
+  
+  // Verificar la conexión a la base de datos
+  async function authenticate() {
+    try {
+      await sequelize.authenticate();
+      console.log('Conexión a la base de datos establecida correctamente.');
+    } catch (error) {
+      console.error('Error al conectar a la base de datos:', error);
+    }
   }
-}
-
 
 
 module.exports = {
