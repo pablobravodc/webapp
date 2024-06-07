@@ -9,7 +9,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     host: process.env.DB_HOST,
     dialect: 'mysql', // Cambiar según el tipo de base de datos que estés utilizando (mysql, postgres, sqlite, etc.)
     port: process.env.DB_PORT, // Asegúrate de que el puerto esté configurado correctamente en tu archivo .env
-    logging: false, // Desactivar el registro de consultas SQL, opcional
+    logging: console.log // Habilitar loggin
   });
   
   // Verificar la conexión a la base de datos
