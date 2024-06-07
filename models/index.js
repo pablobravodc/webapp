@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
     port: config.development.port,
     dialect: 'mysql',
     dialectOptions: {
-      connectTimeout: 100000 // Aumentar el tiempo de espera a 60 segundos (valor en milisegundos)
+      connectTimeout: 60000 // Aumentar el tiempo de espera a 60 segundos (valor en milisegundos)
     }
   }
 );
@@ -19,5 +19,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
+db.User = require('./models/User')(sequelize, Sequelize.DataTypes);
 
 module.exports = db;
