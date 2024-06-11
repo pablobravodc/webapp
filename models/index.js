@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
     port: config.development.port,
     dialect: 'mysql',
     dialectOptions: {
-      connectTimeout: 120000 // Aumentar el tiempo de espera a 60 segundos (valor en milisegundos)
+      connectTimeout: 60000 // Aumentar el tiempo de espera a 60 segundos (valor en milisegundos)
     },
     logging: console.log // Habilitar loggin
   }
